@@ -1,0 +1,40 @@
+
+/* 공통 테마 변수 (필요시 덮어쓰기) */
+:root{
+    --title-accent: #2f6fff;         /* 왼쪽 세로줄 색 */
+    --title-accent-width: 6px;       /* 세로줄 두께 */
+    --title-gap: 10px;               /* 세로줄-텍스트 간격 */
+    --title-underline: #cdd4e0;      /* 밑줄 색 */
+    --title-underline-width: 1px;    /* 밑줄 두께 */
+    --title-mt: 1.25rem;             /* 위 여백 */
+    --title-mb: .25rem;              /* 아래 여백(밑줄 전) */
+}
+
+/* 재사용 가능한 제목 컴포넌트 */
+.section-title{
+    display:block;
+    margin: var(--title-mt) 0 var(--title-mb);
+    padding-left: var(--title-gap);
+    border-left: var(--title-accent-width) solid var(--title-accent);
+    font-weight: 400;
+    line-height: 1.5;
+}
+/* 밑줄: 같은 요소에서 자동 생성 */
+.section-title::after{
+    content:"";
+    display:block;
+    margin-top: .2rem;
+    border-bottom: var(--title-underline-width) solid var(--title-underline);
+}
+
+/* 크기 변형 */
+.section-title.is-sm{ font-size: 1rem; }
+.section-title.is-md{ font-size: 1.25rem; }   /* 기본 권장 */
+.section-title.is-lg{ font-size: 1.5rem; }
+
+/* 옵션: 밑줄 제거 */
+.section-title.no-underline::after{ display:none; }
+
+/* 옵션: 컴팩트/여유 간격 */
+.section-title.is-compact{ --title-mt:.75rem; --title-mb:.15rem; }
+.section-title.is-roomy{ --title-mt:1.5rem; --title-mb:.5rem; }
