@@ -1,40 +1,129 @@
+/* ========== 글로벌 베이스 ========== */
+html {
+  /* 모바일 16px ~ 데스크톱 18px 사이 유동 확대 */
+  font-size: clamp(16px, 1.6vw, 18px);
+}
+body{
+  font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','돋움',sans-serif;
+  color:#111; background:#fff;
+  line-height:1.75;                 /* 본문 줄간격(가독 핵심) */
+  -webkit-text-size-adjust: 100%;
+  margin:0;
+}
 
-/* 공통 테마 변수 (필요시 덮어쓰기) */
+/* 콘텐츠 폭 & 패딩 (모바일 좁게, PC 넉넉하게) */
+.container{
+  max-width: 920px;                  /* 데스크톱 본문 폭 */
+  margin:0 auto;
+  padding: 20px 16px;                /* 모바일 좌우 여백 */
+}
+
+/* 본문 기본 타이포 */
+p{ margin: .85rem 0 1rem; }
+p + p{ margin-top: .75rem; }         /* 단락 붙을 때 살짝 좁힘 */
+strong, b{ font-weight:700; }
+em, i{ font-style:italic; }
+.small{ font-size:.875rem; color:#586071; }
+.muted{ color:#6b7787; }
+
+/* 리스트 */
+ul, ol{ margin:.5rem 0 1rem 1.25rem; }
+li{ margin:.25rem 0; }
+
+/* 표 */
+table{ width:100%; border-collapse:collapse; margin:1rem 0;}
+th, td{ border:1px solid #e7ebf0; padding:.65rem .6rem; text-align:left; }
+th{ background:#f8fbff; font-weight:600; }
+
+/* 코드/인용 */
+code, pre{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+pre{
+  background:#0b1020; color:#e6edf3; padding:1rem; border-radius:10px; overflow:auto;
+}
+blockquote{
+  margin:1rem 0; padding:.75rem 1rem; border-left:4px solid #8fb3ff;
+  background:#f6f8ff; color:#2a3957;
+}
+
+/* 구분선/캡션 */
+hr{ border:none; border-top:1px solid #e7ebf0; margin:1.25rem 0; }
+.caption{ font-size:.9rem; color:#6b7787; margin-top:.35rem; }
+
+/* 버튼/뱃지(첨언/강조용) */
+.badge{
+  display:inline-block; padding:.2rem .55rem; border-radius:999px;
+  font-size:.8rem; line-height:1; border:1px solid #dbe7ff; background:#eef4ff; color:#1247b8;
+}
+.note{
+  background:#fbfcff; border:1px dashed #c7d7f0; padding:.8rem .9rem; border-radius:10px;
+  font-size:.95rem; color:#2a3957; margin:.9rem 0;
+}
+.warn{
+  background:#fff7f2; border:1px solid #ffd2b8; color:#8a3d00;
+  padding:.8rem .9rem; border-radius:10px; margin:.9rem 0;
+}
+
+/* 링크 */
+a{ color:#2f6fff; text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+/* ========== 제목 시스템 (요청하신 스타일 유지 + 가독 개선) ========== */
+/* 공통 테마 변수(필요시 덮어쓰기) */
 :root{
-    --title-accent: #2f6fff;         /* 왼쪽 세로줄 색 */
-    --title-accent-width: 6px;       /* 세로줄 두께 */
-    --title-gap: 10px;               /* 세로줄-텍스트 간격 */
-    --title-underline: #cdd4e0;      /* 밑줄 색 */
-    --title-underline-width: 1px;    /* 밑줄 두께 */
-    --title-mt: 1.25rem;             /* 위 여백 */
-    --title-mb: .25rem;              /* 아래 여백(밑줄 전) */
+  --title-accent:#2f6fff;           /* 왼쪽 세로줄 색 */
+  --title-accent-width:6px;         /* 세로줄 두께 */
+  --title-gap:10px;                 /* 세로줄-텍스트 간격 */
+  --title-underline:#cdd4e0;        /* 밑줄 색 */
+  --title-underline-width:1px;      /* 밑줄 두께 */
+  --title-mt:1.25rem;               /* 위 여백 */
+  --title-mb:.25rem;                /* 아래 여백(밑줄 전) */
 }
 
 /* 재사용 가능한 제목 컴포넌트 */
 .section-title{
-    display:block;
-    margin: var(--title-mt) 0 var(--title-mb);
-    padding-left: var(--title-gap);
-    border-left: var(--title-accent-width) solid var(--title-accent);
-    font-weight: 400;
-    line-height: 1.5;
+  display:block;
+  margin: var(--title-mt) 0 var(--title-mb);
+  padding-left: var(--title-gap);
+  border-left: var(--title-accent-width) solid var(--title-accent);
+  font-weight: 700;                 /* 제목은 굵게(가독↑) */
+  line-height: 1.35;
 }
-/* 밑줄: 같은 요소에서 자동 생성 */
+/* 밑줄 자동 생성 */
 .section-title::after{
-    content:"";
-    display:block;
-    margin-top: .2rem;
-    border-bottom: var(--title-underline-width) solid var(--title-underline);
+  content:"";
+  display:block;
+  margin-top:.25rem;
+  border-bottom: var(--title-underline-width) solid var(--title-underline);
 }
 
-/* 크기 변형 */
-.section-title.is-sm{ font-size: 1rem; }
-.section-title.is-md{ font-size: 1.25rem; }   /* 기본 권장 */
-.section-title.is-lg{ font-size: 1.5rem; }
+/* 크기 변형(모바일~데스크톱 유동 확대) */
+.section-title.is-sm{ font-size: clamp(1rem, 2.8vw, 1.05rem); }
+.section-title.is-md{ font-size: clamp(1.15rem, 3.2vw, 1.35rem); }  /* 소제목 권장 */
+.section-title.is-lg{ font-size: clamp(1.35rem, 3.8vw, 1.8rem); }   /* 대제목 권장 */
 
-/* 옵션: 밑줄 제거 */
+/* 옵션 */
 .section-title.no-underline::after{ display:none; }
-
-/* 옵션: 컴팩트/여유 간격 */
 .section-title.is-compact{ --title-mt:.75rem; --title-mb:.15rem; }
 .section-title.is-roomy{ --title-mt:1.5rem; --title-mb:.5rem; }
+
+/* ========== 본문 계층 글자 크기 가이드 ========== */
+/* 블로그 일반 본문: 1rem (16~18px) */
+.lead{ font-size: clamp(1rem, 3.2vw, 1.125rem); color:#415063; }   /* 도입 문장 */
+.hint{ font-size:.9rem; color:#6b7787; }                           /* 보조 설명 */
+.kicker{ font-size:.9rem; letter-spacing:.04em; color:#1247b8; text-transform:uppercase; }
+
+/* 강조 문구 */
+.emph{ background: linear-gradient(transparent 60%, #fff2a8 60%); font-weight:700; }
+.mark{ background:#fffa90; padding:0 .15rem; border-radius:.2rem; }
+
+/* 모바일에서 리스트/표 가독 향상 */
+@media (max-width: 480px){
+  th, td{ padding:.6rem .5rem; }
+  .container{ padding:18px 14px; }
+}
+
+/* 데스크톱에서 여유 공간, 행간 살짝 축소(타이포 안정감) */
+@media (min-width: 1024px){
+  body{ line-height:1.7; }
+  p{ margin: .9rem 0 1.05rem; }
+}
