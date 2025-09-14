@@ -88,3 +88,32 @@ body{font-family:var(--font-ko); background:var(--bg); color:var(--text); line-h
 /* ====== Anchor Offset for fixed headers (선택사항) ====== */
 .anchor{scroll-margin-top:90px}
 
+
+/* ====== Table Alignment Add-ons ====== */
+/* 1) 표 타이틀(헤더) 가운데 정렬 */
+.table th { 
+  text-align: center; 
+}
+
+/* 2) 숫자 컬럼(가격/상승률 등) 오른쪽 정렬—유연하게 쓰도록 클래스/데이터속성/헤더명별 제공 */
+
+/* (A) 공용 숫자 클래스 */
+.table td.num,
+.table td.price,
+.table td.pct { 
+  text-align: right; 
+}
+
+/* (B) 데이터 속성으로 지정하고 싶을 때 */
+.table td[data-type="number"],
+.table td[data-col="price"],
+.table td[data-col="change"],
+.table td[data-col="pct"] {
+  text-align: right;
+}
+
+/* (C) 컬럼 위치가 고정된 표일 때(예: 5번째=종가, 6번째=상승률) */
+.table tr > td:nth-child(5),
+.table tr > td:nth-child(6) { 
+  text-align: right; 
+}
