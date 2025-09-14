@@ -117,3 +117,64 @@ body{font-family:var(--font-ko); background:var(--bg); color:var(--text); line-h
 .table tr > td:nth-child(6) { 
   text-align: right; 
 }
+
+
+/* =========================
+   Typography Add-ons (표/제목)
+   ========================= */
+
+/* 섹션 제목/부제 */
+.h-section { /* 예: '3) 수혜 예상 기업' */
+  font-weight: 800; font-size: 1.35rem; line-height: 1.35;
+  margin: 22px 0 10px;
+}
+.h-sub { /* 예: '한국 (KOSPI/KOSDAQ)' */
+  font-weight: 700; font-size: 1.05rem; color: var(--muted);
+  margin: 6px 0 14px;
+}
+
+/* 표 타이포: 헤더는 조금 작게, 본문은 읽기 편한 크기 */
+.table th{
+  text-align:center;                 /* 요청사항: 헤더 가운데 */
+  font-size: .95rem; font-weight: 700; letter-spacing:.1px;
+  padding: 14px 16px;
+}
+.table td{
+  font-size: .94rem; line-height: 1.55;
+  padding: 14px 16px; vertical-align: top;
+}
+
+/* 가독성 향상: 줄무늬 + 첫 열(기업명) 강조 */
+.table tr:nth-child(even) td{ background: rgba(255,255,255,.01) }
+.table td:first-child{
+  font-weight: 800; color:#eaf1ff;
+}
+.table td:first-child .ticker{  /* (034020) 같은 종목코드 */
+  display:block; font-weight:600; font-size:.88rem; color:#bcd3ff; margin-top:2px;
+}
+
+/* 본문 내 핵심어 강조(굵게 + 미세 하이라이트) */
+.b { font-weight:800; }
+.emph{
+  font-weight: 800;
+  background: linear-gradient(transparent 60%, rgba(124,92,255,.18) 0);
+  padding: 0 .15em;
+}
+
+/* 컴팩트 표(옵션): 행간/패딩을 살짝 줄이고 싶을 때 .table--compact 추가 */
+.table.table--compact th,
+.table.table--compact td{ padding: 10px 12px; font-size:.92rem }
+
+/* 모바일 최적화 */
+@media (max-width:600px){
+  .h-section{ font-size:1.18rem }
+  .h-sub{ font-size:.98rem }
+  .table th{ font-size:.9rem; padding:12px 12px }
+  .table td{ font-size:.9rem; padding:12px 12px }
+  .table td:first-child{ font-size:.95rem }
+}
+
+/* 이미 적용했던 정렬 규칙(참고)
+.table th{ text-align:center }
+.table td.price,.table td.pct,.table td.num{ text-align:right }
+*/
