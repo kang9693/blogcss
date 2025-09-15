@@ -170,4 +170,51 @@
 .kx.is-dark .card{background:var(--card)}
 .kx.is-dark table{background:#12171e}
 .kx.is-dark .disclaimer{background:#111a25;color:#d9e0ea}
+
+/* ==================================== add 주가데이터 표  =====================================  */
+/* ===== 숫자열 우측 정렬 ===== */
+.kx td[data-col="거래량"],
+.kx td[data-col="증감"],
+.kx td[data-col="대비"],
+.kx td[data-col="등락률"],
+.kx td[data-col="걸래량"],
+.kx td[data-col="매수잔량"]{
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.kx td.num-right{ text-align:right; font-variant-numeric:tabular-nums }
+
+/* ===== 등락 방향 아이콘 ===== */
+.kx td[data-dir]{ font-weight:700 }
+.kx td[data-dir]::before{
+  content:"";
+  display:inline-block;
+  width:0;height:0;
+  margin-right:6px;
+  vertical-align:middle;
+}
+
+/* 상승 = 빨간 ▲ */
+.kx td[data-dir="up"]{ color:#d92c2c;text-align:right }
+.kx td[data-dir="up"]::before{
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-bottom:8px solid currentColor;
+  transform:translateY(-1px);
+}
+
+/* 하락 = 파란 ▼ */
+.kx td[data-dir="down"]{ color:#1f5fd2;text-align:right }
+.kx td[data-dir="down"]::before{
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-top:8px solid currentColor;
+  transform:translateY(1px);
+}
+
+/* 다크모드 보정 */
+.kx.is-dark td[data-dir="up"]{ color:#ff4c4c }
+.kx.is-dark td[data-dir="down"]{ color:#4c8bff }
+
+
 </style>
