@@ -1,180 +1,173 @@
+<!-- ✅ section-title.css는 그대로 사용 (필수) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kang9693/blogcss/section-title.css">
 
-/* ====== Global / Reset ====== */
-:root{
-  --font-ko: 'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','돋움',sans-serif;
-  --bg:#0f1216; --card:#161a20; --text:#e6e9ee; --muted:#a8b0bd; --line:#222832;
-  --brand:#3aa0ff; --accent:#7c5cff; --warn:#ffcc00; --danger:#ff5c77; --success:#22c55e;
-  --chip:#1f2630; --chip-line:#2a3240; --shadow: 0 10px 24px rgba(0,0,0,.28);
+<!-- ✅ blog-unified.css × section-title.css 병합본 (네임스페이스 .kx) -->
+<style>
+/* ========================================================================
+   blog-unified.merged.css (for Tistory) — conflict-free, namespaced (.kx)
+   Author: seonghun kang (guideline by 경제뉴스) / merged by ChatGPT
+   Purpose: PC/모바일 공통 최적화 + section-title.css와 비충돌 병행
+   ======================================================================== */
+
+/* ====== Tokens ====== */
+.kx{
+  --font-ko:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','돋움',sans-serif;
+
+  /* Light theme (기본) */
+  --bg:#ffffff;
+  --card:#ffffff;
+  --text:#111418;
+  --muted:#586071;
+  --line:#e7ebf0;
+
+  --brand:#2f6fff;
+  --accent:#7c5cff;
+  --warn:#ffcc00;
+  --danger:#ff5c77;
+  --success:#22c55e;
+
+  --chip:#f6f8fb;
+  --chip-line:#e7ebf0;
+  --shadow:0 10px 24px rgba(17,20,24,.06);
+
+  /* Spacing */
+  --space-outer:20px;
+  --space-card:16px;
+  --list-gap:28px; /* 지침: 리스트 항목 간격 28px */
+
+  /* Table */
+  --thead-bg:#f6f8fb;
+
+  /* Adaptive font sizes */
+  --fs-hero:clamp(22px, 2.8vw, 28px);
+  --fs-body:clamp(15px, 1.8vw, 16.5px);
+  --fs-small:clamp(13px, 1.4vw, 14.5px);
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{font-family:var(--font-ko); background:var(--bg); color:var(--text); line-height:1.6}
 
-/* ====== Layout ====== */
-.container{max-width:1100px;margin:0 auto;padding:20px}
-@media (min-width:1200px){.container{max-width:1180px}}
-.section-gap{margin-top:28px}
+/* ====== Base reset (kx 범위 한정) ====== */
+.kx, .kx *{box-sizing:border-box}
+.kx{background:var(--bg);color:var(--text);font-family:var(--font-ko);line-height:1.75}
+.kx .container{max-width:960px;margin:0 auto;padding:var(--space-outer) 16px}
+.kx p{margin:0 0 12px}
+.kx .small{color:var(--muted);font-size:var(--fs-small)}
+.kx a{color:var(--brand);text-decoration:none}
+.kx a:hover{text-decoration:underline}
 
-/* ====== Cards Grid ====== */
-.grid-cards{
-  display:grid; gap:16px;
-  grid-template-columns:1fr;
+/* ====== Cards ====== */
+.kx .card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:var(--space-card);
+  margin:14px 0;
+  box-shadow:var(--shadow);
 }
-@media (min-width:600px){.grid-cards{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:980px){.grid-cards{grid-template-columns:repeat(3,1fr)}}
 
-.card{
-  background:var(--card); border:1px solid var(--line); border-radius:16px;
-  padding:16px; box-shadow:var(--shadow); transition:transform .18s ease, border-color .18s ease;
-}
-.card:hover{transform:translateY(-3px); border-color:#2f3a4e}
-.card .card-title{font-weight:700;font-size:1.05rem;margin:2px 0 10px}
-.card .meta{font-size:.85rem;color:var(--muted)}
-.card .desc{margin-top:10px;color:#d6dbe3}
+/* ====== Titles (section-title.css와 충돌 방지: 여기는 margin/배치만) ====== */
+.kx h2.section-title,
+.kx h3.section-title{margin:18px 0 10px}
+.kx h2.section-title.is-lg{margin-top:22px}
 
-/* ====== Highlight / Badges ====== */
-.hl{background:linear-gradient(transparent 60%, rgba(58,160,255,.35) 0); padding:0 .2em}
-.kpi{
-  display:flex;align-items:center;gap:10px; padding:12px;border-radius:12px;
-  background:rgba(58,160,255,.08); border:1px dashed #2a3a54
-}
-.kpi .value{font-weight:800;font-size:1.25rem}
-.badge{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--chip-line);background:var(--chip);font-size:.82rem;color:#cbd5e1}
-.badge.warn{border-color:#4a3a12;background:rgba(255,204,0,.12);color:#ffd867}
-.badge.success{border-color:#1f3a27;background:rgba(34,197,94,.12);color:#7ee2a3}
-.badge.danger{border-color:#4a1f28;background:rgba(255,92,119,.12);color:#ff9fb0}
+/* ====== Hero / Thumbnail slot ====== */
+.kx .hero.card{padding:0;overflow:hidden}
+.kx .hero-inner{position:relative}
+.kx .hero-inner img{display:block;width:100%;height:auto}
+.kx .hero-title{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.45) 70%);color:#fff;font-weight:700;font-size:var(--fs-hero)}
 
-/* 주가 컬러 */
-.up{color:#59ffa3} .down{color:#ff7a8a} .flat{color:#cbd5e1}
-
-/* ====== Chips / Tags ====== */
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:6px 10px;border:1px solid var(--chip-line);background:var(--chip);border-radius:10px;font-size:.82rem}
-
-/* ====== Table (responsive) ====== */
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}
-.table{width:100%;border-collapse:collapse;min-width:680px}
-.table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left}
-.table th{background:#171c24;color:#c8d0dc;font-weight:700;position:sticky;top:0}
-.table tr:hover td{background:#141920}
+/* ====== Lists (28px 규칙) ====== */
+.kx ol, .kx ul{margin:0;padding-left:1.25rem}
+.kx ol>li, .kx ul>li{margin:0 0 calc(var(--list-gap) * 1px)}
 
 /* ====== TOC (목차) ====== */
-.toc{
-  background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px;
+.kx .toc.card ol{margin:0;padding-left:1.25rem}
+.kx .toc.card li{margin:0 0 calc(var(--list-gap) * .5px)}
+.kx .toc.card a{display:inline-block}
+
+/* ====== Key-Value blocks ====== */
+.kx .kv{display:grid;grid-template-columns:120px 1fr;gap:10px 14px;align-items:flex-start;margin:10px 0}
+.kx .kv .k{
+  font-weight:700;
+  background:var(--chip);
+  border:1px solid var(--chip-line);
+  border-radius:10px;
+  padding:8px 10px;
+  text-align:center;
 }
-.toc ul{list-style:none;margin:0;padding:0}
-.toc li{margin:6px 0}
-.toc a{color:#bcd3ff;text-decoration:none}
-.toc a:hover{text-decoration:underline}
-
-/* ====== Utilities ====== */
-.flex{display:flex;gap:10px;align-items:center}
-.justify-between{justify-content:space-between}
-.muted{color:var(--muted)}
-.mt-8{margin-top:8px} .mt-16{margin-top:16px} .mt-24{margin-top:24px}
-.center{text-align:center}
-
-/* ====== Note (투자 유의 문구) ====== */
-.note{
-  margin-top:18px; font-size:.9rem; color:#cbd5e1;
-  border-left:4px solid var(--warn); padding:10px 12px; background:rgba(255,204,0,.06); border-radius:6px
-}
-
-/* ====== Images in Cards ====== */
-.card .thumb{
-  width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; border:1px solid var(--line); margin-bottom:10px
+.kx .kv .v{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 12px;
 }
 
-/* ====== Anchor Offset for fixed headers (선택사항) ====== */
-.anchor{scroll-margin-top:90px}
+/* ====== Table (지수/종목 표) ====== */
+.kx .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+.kx table{width:100%;border-collapse:collapse;background:#fff;font-size:0.98rem}
+.kx thead th{
+  position:sticky;top:0;z-index:1;
+  background:var(--thead-bg);
+  border-bottom:1px solid var(--line);
+  padding:12px 10px;
+  text-align:left;
+  font-weight:700;
+  white-space:nowrap;
+}
+.kx tbody td{border-top:1px solid var(--line);padding:10px;vertical-align:middle}
+.kx tbody tr:hover{background:#fafbfc}
+.kx .num{text-align:right;font-variant-numeric:tabular-nums}
+.kx .mono{font-variant-numeric:tabular-nums}
 
+/* ====== Chips / Badges ====== */
+.kx .chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--chip);border:1px solid var(--chip-line);
+  padding:6px 10px;border-radius:999px;font-size:.92rem
+}
+.kx .chip .dot{width:8px;height:8px;border-radius:50%}
+.kx .chip.-up .dot{background:var(--success)}
+.kx .chip.-down .dot{background:var(--danger)}
+.kx .chip.-warn .dot{background:var(--warn)}
 
-/* ====== Table Alignment Add-ons ====== */
-/* 1) 표 타이틀(헤더) 가운데 정렬 */
-.table th { 
-  text-align: center; 
+/* ====== Buttons (유틸) ====== */
+.kx .btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:10px;
+  border:1px solid var(--line);background:#fff;color:var(--text);
+  font-weight:600;text-decoration:none
+}
+.kx .btn:hover{box-shadow:0 6px 16px rgba(0,0,0,.08)}
+
+/* ====== Notice / Disclaimer ====== */
+.kx .disclaimer{
+  margin-top:10px;
+  padding:12px 14px;
+  border:1px dashed var(--line);
+  border-radius:10px;
+  background:#fafbff;
+  color:#333;
+  font-size:.95rem;
 }
 
-/* 2) 숫자 컬럼(가격/상승률 등) 오른쪽 정렬—유연하게 쓰도록 클래스/데이터속성/헤더명별 제공 */
-
-/* (A) 공용 숫자 클래스 */
-.table td.num,
-.table td.price,
-.table td.pct { 
-  text-align: right; 
-}
-
-/* (B) 데이터 속성으로 지정하고 싶을 때 */
-.table td[data-type="number"],
-.table td[data-col="price"],
-.table td[data-col="change"],
-.table td[data-col="pct"] {
-  text-align: right;
-}
-
-/* (C) 컬럼 위치가 고정된 표일 때(예: 5번째=종가, 6번째=상승률) */
-.table tr > td:nth-child(5),
-.table tr > td:nth-child(6) { 
-  text-align: right; 
-}
-
-
-/* =========================
-   Typography Add-ons (표/제목)
-   ========================= */
-
-/* 섹션 제목/부제 */
-.h-section { /* 예: '3) 수혜 예상 기업' */
-  font-weight: 800; font-size: 1.35rem; line-height: 1.35;
-  margin: 22px 0 10px;
-}
-.h-sub { /* 예: '한국 (KOSPI/KOSDAQ)' */
-  font-weight: 700; font-size: 1.05rem; color: var(--muted);
-  margin: 6px 0 14px;
-}
-
-/* 표 타이포: 헤더는 조금 작게, 본문은 읽기 편한 크기 */
-.table th{
-  text-align:center;                 /* 요청사항: 헤더 가운데 */
-  font-size: .95rem; font-weight: 700; letter-spacing:.1px;
-  padding: 14px 16px;
-}
-.table td{
-  font-size: .94rem; line-height: 1.55;
-  padding: 14px 16px; vertical-align: top;
-}
-
-/* 가독성 향상: 줄무늬 + 첫 열(기업명) 강조 */
-.table tr:nth-child(even) td{ background: rgba(255,255,255,.01) }
-.table td:first-child{
-  font-weight: 800; color:#eaf1ff;
-}
-.table td:first-child .ticker{  /* (034020) 같은 종목코드 */
-  display:block; font-weight:600; font-size:.88rem; color:#bcd3ff; margin-top:2px;
-}
-
-/* 본문 내 핵심어 강조(굵게 + 미세 하이라이트) */
-.b { font-weight:800; }
-.emph{
-  font-weight: 800;
-  background: linear-gradient(transparent 60%, rgba(124,92,255,.18) 0);
-  padding: 0 .15em;
-}
-
-/* 컴팩트 표(옵션): 행간/패딩을 살짝 줄이고 싶을 때 .table--compact 추가 */
-.table.table--compact th,
-.table.table--compact td{ padding: 10px 12px; font-size:.92rem }
-
-/* 모바일 최적화 */
+/* ====== Layout helpers ====== */
+.kx .grid{display:grid;gap:14px}
+.kx .grid.cols-2{grid-template-columns:1fr 1fr}
+.kx .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:920px){.kx .grid.cols-3{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){
-  .h-section{ font-size:1.18rem }
-  .h-sub{ font-size:.98rem }
-  .table th{ font-size:.9rem; padding:12px 12px }
-  .table td{ font-size:.9rem; padding:12px 12px }
-  .table td:first-child{ font-size:.95rem }
+  .kx{padding:16px 12px}
+  .kx .kv{grid-template-columns:1fr}
+  .kx .grid.cols-2,.kx .grid.cols-3{grid-template-columns:1fr}
+  .kx thead th, .kx tbody td{padding:10px 8px}
 }
 
-/* 이미 적용했던 정렬 규칙(참고)
-.table th{ text-align:center }
-.table td.price,.table td.pct,.table td.num{ text-align:right }
-*/
+/* ====== Optional: Dark mode (페이지 전체 다크스킨 충돌 방지: 수동 클래스) ====== */
+.kx.is-dark{
+  --bg:#0f1216; --card:#161a20; --text:#e6e9ee; --muted:#a8b0bd; --line:#222832;
+  --brand:#3aa0ff; --accent:#7c5cff;
+  --chip:#1f2630; --chip-line:#2a3240;
+  --thead-bg:#141922;
+  --shadow:0 10px 24px rgba(0,0,0,.28);
+}
+.kx.is-dark .card{background:var(--card)}
+.kx.is-dark table{background:#12171e}
+.kx.is-dark .disclaimer{background:#111a25;color:#d9e0ea}
+</style>
