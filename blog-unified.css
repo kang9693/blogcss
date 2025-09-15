@@ -1,0 +1,147 @@
+/* ==========================================================================
+   blog-unified.css  (section-title + layout + responsive)
+   Author: seonghun kang (guideline by 경제뉴스)
+   Purpose: Tistory PC/모바일 공통 최적화
+   ========================================================================== */
+
+/* ====== Global / Reset ====== */
+:root{
+  /* Color & font tokens */
+  --font-ko: 'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','돋움',sans-serif;
+  --bg:#ffffff; 
+  --text:#111418;
+  --muted:#586071;
+  --line:#e7ebf0;
+  --brand:#2f6fff;
+  --accent:#7c5cff;
+  --shadow: 0 10px 24px rgba(0,0,0,.08);
+
+  /* Spacing */
+  --container: 960px;
+  --radius: 14px;
+  --pad: 16px;
+  --gap: 12px;
+  --list-gap: 28px; /* ✅ 리스트 항목 간격 규칙 */
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-ko);
+  font-size:16px;
+  line-height:1.75;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ====== Layout (PC/모바일 공통) ====== */
+.kx{ /* 문서 루트 컨테이너 */
+  background:var(--bg);
+  color:var(--text);
+}
+.kx .container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:20px 16px;
+}
+.kx .card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--pad);
+  margin:14px 0;
+  box-shadow:var(--shadow);
+}
+.kx .small{color:var(--muted);font-size:.92rem}
+
+/* 리스트 간격 28px 규칙 */
+.kx ol,.kx ul{margin:0; padding-left:1.25rem}
+.kx li{margin:0 0 var(--list-gap) 0}
+
+/* Key-Value 블록 */
+.kx .kv{display:flex; gap:var(--gap); border-top:1px dashed var(--line); padding:12px 0}
+.kx .kv:first-child{border-top:none}
+.kx .kv .k{min-width:92px; font-weight:700; color:#334155}
+.kx .kv .v{flex:1}
+
+/* 테이블 */
+.kx table{width:100%; border-collapse:separate; border-spacing:0}
+.kx th,.kx td{padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle}
+.kx thead th{background:#f7f9fc; font-weight:700}
+.kx tbody tr:hover{background:#fafbfd}
+/* 모바일에서 테이블 좌우 스크롤 */
+.kx .table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+
+/* Chip */
+.chip{
+  display:inline-block; padding:.32rem .66rem;
+  border:1px solid var(--line); border-radius:999px;
+  background:#f8fafc; margin-right:.4rem; font-size:.92rem;
+}
+
+/* 히어로(썸네일 슬롯) */
+.hero.card{padding:0; overflow:hidden; margin:12px 0 20px}
+.hero .hero-inner{
+  aspect-ratio:1200/630; /* 1200x630 썸네일 비율 */
+  width:100%; background:#f3f6ff;
+  display:flex; align-items:center; justify-content:center;
+}
+.hero .hero-inner img{width:100%; height:auto; display:block}
+
+/* ====== Section Title (section-title.css 통합) ====== */
+.section-title{
+  position:relative;
+  margin:22px 0 14px;
+  padding:0 0 10px 0;
+  font-weight:800;
+  line-height:1.35;
+  word-break:keep-all;
+  letter-spacing:-.01em;
+  border-bottom:2px solid var(--line);
+}
+.section-title.is-lg{font-size:1.65rem}
+.section-title.is-md{font-size:1.25rem}
+.section-title.is-compact{margin:10px 0 8px; padding-bottom:6px}
+.section-title.no-underline{border-bottom:none}
+
+/* 가독성 보조 */
+.section-title strong{color:var(--brand)}
+.section-title a{color:inherit; text-decoration:none}
+.section-title a:hover{color:var(--brand)}
+
+/* ====== Utilities ====== */
+.hr{height:1px; background:var(--line); border:0; margin:18px 0}
+.center{text-align:center}
+.right{text-align:right}
+
+/* ====== Responsive ====== */
+@media (min-width:1280px){ /* 대형 화면 */
+  body{font-size:17px; line-height:1.8}
+  .kx .container{max-width:1120px}
+}
+@media (max-width:1024px){ /* 태블릿 가로 */
+  .kx .container{padding:18px 14px}
+  body{font-size:15px}
+}
+@media (max-width:720px){ /* 모바일 */
+  .kx .container{padding:14px 10px}
+  .section-title.is-lg{font-size:1.42rem}
+  .section-title.is-md{font-size:1.12rem}
+  .kx th,.kx td{padding:9px 8px; font-size:.92rem}
+  .kx .kv .k{min-width:78px}
+  .chip{font-size:.88rem}
+  body{font-size:14px; line-height:1.65}
+}
+@media (max-width:480px){ /* 작은 모바일 */
+  .section-title.is-lg{font-size:1.28rem}
+  .section-title.is-md{font-size:1.05rem}
+  body{font-size:13.5px}
+}
+
+/* ====== Print (선택) ====== */
+@media print{
+  .hero .hero-inner{aspect-ratio:auto}
+  .kx .card{box-shadow:none}
+}
